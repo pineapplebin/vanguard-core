@@ -1,0 +1,24 @@
+{
+  "name": "vanguard-core",
+  "version": "0.0.1",
+  "description": "cardfight-vanguard game core by TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --config jest.config.js"
+  },
+  "keywords": [
+    "cardfight",
+    "vanguard",
+    "typescript"
+  ],
+  "author": "pineapple-bin",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "@types/jest": "^22.2.3",
+    "jest": "^23.0.0",
+    "ts-jest": "^22.4.6"
+  },
+  "dependencies": {
+    "typescript": "^2.8.3"
+  }
+}
