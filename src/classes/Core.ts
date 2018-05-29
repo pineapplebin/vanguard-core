@@ -2,8 +2,8 @@ import Base from "./Base";
 import Player from "./Player";
 import { repeat } from "../utils/basic";
 import { DeckType } from "./types/Duel";
-import StateMechine from "./core-state";
-import InitState from "./core-state/InitState";
+import StateMechine from "./core-states";
+import PrepareState from "./core-states/PrepareState";
 
 type CoreConfig = {
 }
@@ -17,8 +17,8 @@ export default class Core extends Base {
     this.flow = new StateMechine(this);
   }
 
-  setPlayerInfo(player_id: string, deck: DeckType) {
-    this.players[player_id] = new Player({ player_id, deck });
+  setPlayerInfo(player_id: string, deck_info: DeckType) {
+    this.players[player_id] = new Player({ player_id, deck_info });
     return this.players[player_id];
   }
 
@@ -26,7 +26,7 @@ export default class Core extends Base {
     if (Object.keys(this.players).length !== 2) {
       throw new Error('can not start game when not giving enough 2 players info');
     }
-    this.flow.addNewState(new InitState(this));
+    this.flow.addNewState(new PrepareState(this));
   }
 
   tick() {

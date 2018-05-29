@@ -1,31 +1,36 @@
 import Base from "./Base";
-import { DeckType, ZonesType } from "./types/Duel";
-import Zone from "./Zone";
-import FieldZone from "./FieldZone";
+import { DeckType } from "./types/Duel";
+import MainDeckZone from "./zones/MainDeckZone";
+import FieldZone from "./zones/FieldZone";
+import HandZone from "./zones/HandZone";
+import DropZone from "./zones/DropZone";
 
 type PlayerConfig = {
   player_id: string,
-  deck: DeckType,
+  deck_info: DeckType,
+}
+
+type ZonesType = {
+  main_deck: MainDeckZone,
+  field: FieldZone,
+  hand: HandZone,
+  drop: DropZone,
 }
 
 export default class Player extends Base {
+  deck_info: DeckType;
   player_id: string;
   zones: ZonesType;
 
   constructor(conf: PlayerConfig) {
     super();
+    this.deck_info = conf.deck_info;
     this.player_id = conf.player_id;
     this.zones = {
-      main_deck: new Zone(conf.deck.main),
-      extra_deck: new Zone(conf.deck.extra),
-      hand: new Zone(),
-      drop: new Zone(),
-      damage: new Zone(),
-      bind: new Zone(),
-      trigger: new Zone(),
-      removal: new Zone(),
-      soul: new Zone(),
+      main_deck: new MainDeckZone(conf.deck_info.main),
       field: new FieldZone(),
+      hand: new HandZone(),
+      drop: new DropZone(),
     }
   }
 }
